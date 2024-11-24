@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
@@ -22,12 +24,15 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [ObservableProperty] private string _username = String.Empty;
+    [ObservableProperty] private Bitmap? _profileImage;
+    [ObservableProperty] private GitHubProfile? _githubProfile;
     
     [RelayCommand]
     private async Task Search()
     {
-        var result = await GetGitHubProfile(Username);
-        Console.Write(result.Login);
+        GithubProfile = await GetGitHubProfile(Username);
+        Console.Write(GitHubProfile.AvatarUrl);
+
     }   
 }
 
@@ -35,7 +40,7 @@ public class GitHubProfile
 {
     public string? Login { get; set; }
     public string? Name { get; set; }
-    public string? AvatarUrl { get; set; }
+    public static string? AvatarUrl { get; set; }
     public string? Bio { get; set; }
     public int? PublicRepos { get; set; }
     public int? Followers { get; set; }

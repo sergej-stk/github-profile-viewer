@@ -44,15 +44,40 @@
            Grid.Column="0"
            Grid.Row="1"
            Margin="10">
-           <StackPanel>
-               
-           </StackPanel>
+           <Grid
+               ColumnDefinitions="* *"
+               RowDefinitions="Auto Auto Auto">
+               <Image
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Source="{Binding ProfileImage}">
+                   
+               </Image>
+               <TextBlock
+                   Grid.Column="0"
+                   Grid.Row="1">
+                   Login:
+               </TextBlock>
+               <TextBlock
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   Text="{Binding GithubProfile.Login}" />
+               <TextBlock
+                   Grid.Column="0"
+                   Grid.Row="2">
+                   Name:
+               </TextBlock>
+               <TextBlock
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   Text="{Binding GithubProfile.Name}" />
+           </Grid>
        </controls:Card>
        <controls:Card
            Grid.Column="1"
            Grid.Row="1"
            Margin="10">
-           
        </controls:Card>
    </Grid>
 
