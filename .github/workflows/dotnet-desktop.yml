@@ -32,7 +32,7 @@ jobs:
       run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }}
 
     - name: Restore dependencies
-      run: dotnet restore ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }}
+      run: dotnet restore ${{ env.Solution_Name }}
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
