@@ -3,12 +3,13 @@
         xmlns:vm="using:github_profile_viewer.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="github_profile_viewer.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="github_profile_viewer">
+        Title="GitHub Profile Viewer">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -16,11 +17,32 @@
     
    <Grid
        ColumnDefinitions="1* 2*"
-       RowDefinitions="*"
-       ShowGridLines="True">
+       RowDefinitions="Auto *">
        <controls:Card
            Grid.Column="0"
            Grid.Row="0"
+           Grid.ColumnSpan="2"
+           Padding="0"
+           Margin="10 10 10 0">
+           <TextBox 
+               Classes="solo" 
+               Theme="{StaticResource SoloTextBox}" 
+               Text="{Binding Username}"
+               Watermark="Enter a username">
+               <TextBox.InnerRightContent>
+                   <Button
+                       Command="{Binding SearchCommand}"
+                       Classes="Flat">
+                       <Button.Content>
+                           <materialIcons:MaterialIcon Kind="Search"></materialIcons:MaterialIcon>
+                       </Button.Content>
+                   </Button>
+               </TextBox.InnerRightContent>
+           </TextBox>
+       </controls:Card>
+       <controls:Card
+           Grid.Column="0"
+           Grid.Row="1"
            Margin="10">
            <StackPanel>
                
@@ -28,7 +50,7 @@
        </controls:Card>
        <controls:Card
            Grid.Column="1"
-           Grid.Row="0"
+           Grid.Row="1"
            Margin="10">
            
        </controls:Card>
