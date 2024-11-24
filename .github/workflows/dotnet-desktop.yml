@@ -1,0 +1,41 @@
+name: .NET Core Desktop
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: github-profile-viewer.sln
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build solution
+      run: dotnet build ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.Solution_Name }} --configuration ${{ matrix.configuration }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: .NET Build
+        path: ${{ env.Solution_Name }}/bin/${{ matrix.configuration }}
